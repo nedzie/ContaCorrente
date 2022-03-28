@@ -5,15 +5,49 @@ namespace ContaCorrente.ConsoleApp
     internal class ContaCorrente
     {
         #region Atributos
-        public int numero;
-        public decimal saldo;
-        public decimal limite;
-        public bool especial;
-        public Movimentacao[] movimentacoes;
+        private int numero;
+        private decimal saldo;
+        private decimal limite;
+        private bool especial;
+        private Movimentacao[] movimentacoes;
+
         #endregion
+
         #region Contador
-        int contador = 0;
+        public int contador = 0; // Não é global, por isso não é static
         #endregion
+
+        #region Encapsulamento
+        public decimal Saldo
+        {
+            set { saldo = value; }
+        }
+
+        public int Numero
+        {
+            get { return numero; }
+            set { numero = value; }
+        }
+
+        public decimal Limite
+        {
+            get { return limite; }
+            set { limite = value; }
+        }
+
+        public bool Especial
+        {
+            get { return especial; }
+            set { especial = value; }
+        }
+
+        public Movimentacao[] Movimentacoes
+        {
+            get { return movimentacoes; }
+            set { movimentacoes = value; }
+        }
+        #endregion
+
         #region Histórico
         public void SalvarMovimentacao(decimal valor, Movimentacao.TipoMovimentacao tipoEmissor)
         {
@@ -34,6 +68,7 @@ namespace ContaCorrente.ConsoleApp
             contaReceptora.contador++;
         }
         #endregion
+
         #region Ações nas contas
         public void Sacar(decimal saque)
         {
@@ -41,12 +76,10 @@ namespace ContaCorrente.ConsoleApp
             {
                 SalvarMovimentacao(saque, Movimentacao.TipoMovimentacao.Debito);
                 saldo -= saque;
-                //return saldo;
             }
             else
             {
-                MensagemInformativa("Desculpe, o valor de saque informado é inválido.", Console.ForegroundColor = ConsoleColor.Red);
-                //return saldo;
+                Mostrar.Mensagem("Desculpe, o valor de saque informado é inválido.", Console.ForegroundColor = ConsoleColor.Red); // Igual ao Console
             }
         }
         public decimal Depositar(decimal deposito)
@@ -57,7 +90,7 @@ namespace ContaCorrente.ConsoleApp
                 saldo += deposito;
             }
             else
-                MensagemInformativa("Desculpe, o valor de depósito informado é inválido.", Console.ForegroundColor = ConsoleColor.Red);
+                Mostrar.Mensagem("Desculpe, o valor de depósito informado é inválido.", Console.ForegroundColor = ConsoleColor.Red);
             return saldo;
         }
 
@@ -71,7 +104,7 @@ namespace ContaCorrente.ConsoleApp
             }
             else
             {
-                MensagemInformativa("Desculpe, o valor de transferência informado é inválido.", Console.ForegroundColor = ConsoleColor.Red);
+                Mostrar.Mensagem("Desculpe, o valor de transferência informado é inválido.", Console.ForegroundColor = ConsoleColor.Red);
             }
         }
 
@@ -106,18 +139,13 @@ namespace ContaCorrente.ConsoleApp
         }
         #endregion
         #region Métodos complementares
-        public static void MensagemInformativa(string mensagem, ConsoleColor cor)
-        {
-            Console.ForegroundColor = cor;
-            Console.WriteLine(mensagem);
-            Console.ResetColor();
-        }
+
         public void ExibirExtrato()
         {
-            Console.WriteLine("Número....: " + numero);
+            Console.WriteLine("Número....: " + Numero);
             Console.WriteLine("Saldo.....: " + saldo);
-            Console.WriteLine("Limite....: " + limite);
-            if (especial == true)
+            Console.WriteLine("Limite....: " + Limite);
+            if (Especial)
             {
                 Console.WriteLine("É especial: sim");
             }

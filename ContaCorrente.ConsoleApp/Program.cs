@@ -8,11 +8,11 @@ namespace ContaCorrente.ConsoleApp
         {
             #region Conta1
             ContaCorrente conta1 = new();
-            conta1.saldo = 1000;
-            conta1.numero = 12;
-            conta1.limite = 0;
-            conta1.especial = true;
-            conta1.movimentacoes = new Movimentacao[10];
+            conta1.Saldo = 1000;
+            conta1.Numero = 12;
+            conta1.Limite = 0;
+            conta1.Especial = true;
+            conta1.Movimentacoes = new Movimentacao[10];
             #endregion
 
             conta1.Sacar(200);
@@ -27,11 +27,11 @@ namespace ContaCorrente.ConsoleApp
 
             #region Conta2
             ContaCorrente conta2 = new();
-            conta2.saldo = 300;
-            conta2.numero = 13;
-            conta2.limite = 0;
-            conta2.especial = true;
-            conta2.movimentacoes = new Movimentacao[10];
+            conta2.Saldo = 300;
+            conta2.Numero = 13;
+            conta2.Limite = 0;
+            conta2.Especial = true;
+            conta2.Movimentacoes = new Movimentacao[10];
             #endregion
 
             conta1.TransferirPara(conta2, 400);
